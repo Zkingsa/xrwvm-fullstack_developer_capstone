@@ -22,14 +22,17 @@
         <h1>Post a Review</h1>
         <form action="/djangoapp/submit_review/" method="post">
             {% csrf_token %}
+            
             <div class="mb-3">
                 <label for="reviewText" class="form-label">Your Review</label>
                 <textarea class="form-control" id="reviewText" name="review" rows="3" placeholder="Write your review here..." required></textarea>
             </div>
+
             <div class="mb-3">
                 <label for="purchaseDate" class="form-label">Purchase Date</label>
                 <input type="date" class="form-control" id="purchaseDate" name="purchase_date" required>
             </div>
+
             <div class="mb-3">
                 <label for="carMake" class="form-label">Car Make</label>
                 <select class="form-control" id="carMake" name="car_make" required>
@@ -40,10 +43,12 @@
                     <option value="BMW">BMW</option>
                 </select>
             </div>
+
             <div class="mb-3">
                 <label for="carYear" class="form-label">Car Year</label>
                 <input type="number" class="form-control" id="carYear" name="car_year" required>
             </div>
+
             <button type="submit" class="btn btn-primary">Post Review</button>
         </form>
         <a href="/djangoapp/dealers/" class="btn btn-secondary mt-3">Back to Dealers</a>
