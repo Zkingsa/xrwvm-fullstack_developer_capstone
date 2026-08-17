@@ -5,6 +5,7 @@ from frontend.views import login_view, logout_view, dealers_view, dealers_by_sta
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='landing.html'), name='landing'),
     path('about/', TemplateView.as_view(template_name='About.html')),
     path('contact/', TemplateView.as_view(template_name='Contact.html')),
     path('djangoapp/login/', login_view, name='login'),
