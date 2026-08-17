@@ -11,7 +11,7 @@
             <div class="d-flex">
                 {% if user.is_authenticated %}
                     <span class="navbar-text me-3">Welcome, {{ user.username }}</span>
-                    <a class="btn btn-outline-light btn-sm" href="/djangoapi/logout/">Logout</a>
+                    <a class="btn btn-outline-light btn-sm" href="/djangoapp/logout/">Logout</a>
                 {% else %}
                     <a class="btn btn-outline-light btn-sm" href="/admin/">Login</a>
                 {% endif %}
@@ -20,17 +20,25 @@
     </nav>
     <div class="container mt-5">
         <h1>{{ dealer.name }}</h1>
-        <p><strong>State:</strong> {{ dealer.state }}</p>
+        <p><strong>ID:</strong> {{ dealer.id }}</p>
+        <p><strong>City:</strong> {{ dealer.city }}</p>
         <p><strong>Address:</strong> {{ dealer.address }}</p>
-        <h3>Reviews</h3>
+        <p><strong>ZIP:</strong> {{ dealer.zip }}</p>
+        <p><strong>State:</strong> {{ dealer.state }}</p>
+        
+        <h3 class="mt-4">Reviews</h3>
         <ul class="list-group">
             {% for review in dealer.reviews %}
-                <li class="list-group-item">{{ review.user }}: {{ review.text }}</li>
+                <li class="list-group-item">
+                    <strong>{{ review.user }}:</strong> {{ review.text }}
+                    <span class="badge bg-success ms-2">Positive 😊</span>
+                </li>
             {% empty %}
                 <li class="list-group-item">No reviews yet.</li>
             {% endfor %}
         </ul>
-        <a href="/djangoapi/dealers/" class="btn btn-secondary mt-3">Back to Dealers</a>
+        <a href="/djangoapp/review/{{ dealer.id }}/" class="btn btn-primary mt-3">Post a Review</a>
+        <a href="/djangoapp/dealers/" class="btn btn-secondary mt-3">Back to Dealers</a>
     </div>
 </body>
 </html>
