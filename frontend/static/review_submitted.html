@@ -11,7 +11,7 @@
             <div class="d-flex">
                 {% if user.is_authenticated %}
                     <span class="navbar-text me-3">Welcome, {{ user.username }}</span>
-                    <a class="btn btn-outline-light btn-sm" href="/djangoapi/logout/">Logout</a>
+                    <a class="btn btn-outline-light btn-sm" href="/djangoapp/logout/">Logout</a>
                 {% else %}
                     <a class="btn btn-outline-light btn-sm" href="/admin/">Login</a>
                 {% endif %}
@@ -24,8 +24,21 @@
             <p>Your review has been successfully submitted.</p>
             <hr>
             <p class="mb-0"><strong>Your review:</strong> "{{ review }}"</p>
+            
+            <!-- Sentiment Image based on review text -->
+            <div class="mt-3">
+                <p><strong>Sentiment:</strong> 
+                {% if "good" in review|lower or "great" in review|lower or "nice" in review|lower or "excellent" in review|lower %}
+                    <span style="font-size: 2rem;">😊</span> (Positive)
+                {% elif "bad" in review|lower or "terrible" in review|lower or "worst" in review|lower %}
+                    <span style="font-size: 2rem;">😢</span> (Negative)
+                {% else %}
+                    <span style="font-size: 2rem;">😐</span> (Neutral)
+                {% endif %}
+                </p>
+            </div>
         </div>
-        <a href="/djangoapi/dealer/{{ dealer_id }}/" class="btn btn-primary">Back to Dealer</a>
+        <a href="/djangoapp/dealer/{{ dealer_id }}/" class="btn btn-primary">Back to Dealer</a>
     </div>
 </body>
 </html>
