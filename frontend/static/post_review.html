@@ -11,7 +11,7 @@
             <div class="d-flex">
                 {% if user.is_authenticated %}
                     <span class="navbar-text me-3">Welcome, {{ user.username }}</span>
-                    <a class="btn btn-outline-light btn-sm" href="/djangoapi/logout/">Logout</a>
+                    <a class="btn btn-outline-light btn-sm" href="/djangoapp/logout/">Logout</a>
                 {% else %}
                     <a class="btn btn-outline-light btn-sm" href="/admin/">Login</a>
                 {% endif %}
@@ -20,16 +20,33 @@
     </nav>
     <div class="container mt-5">
         <h1>Post a Review</h1>
-        <form action="/djangoapi/submit_review/" method="post">
+        <form action="/djangoapp/submit_review/" method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="reviewText" class="form-label">Your Review</label>
-                <textarea class="form-control" id="reviewText" name="review" rows="3" placeholder="Write your review here..."></textarea>
+                <textarea class="form-control" id="reviewText" name="review" rows="3" placeholder="Write your review here..." required></textarea>
             </div>
-            <input type="hidden" name="dealer_id" value="{{ dealer_id }}">
-            <button type="submit" class="btn btn-primary">Submit Review</button>
+            <div class="mb-3">
+                <label for="purchaseDate" class="form-label">Purchase Date</label>
+                <input type="date" class="form-control" id="purchaseDate" name="purchase_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="carMake" class="form-label">Car Make</label>
+                <select class="form-control" id="carMake" name="car_make" required>
+                    <option value="">-- Select Make --</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Ford">Ford</option>
+                    <option value="BMW">BMW</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="carYear" class="form-label">Car Year</label>
+                <input type="number" class="form-control" id="carYear" name="car_year" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Review</button>
         </form>
-        <a href="/djangoapi/dealers/" class="btn btn-secondary mt-3">Back to Dealers</a>
+        <a href="/djangoapp/dealers/" class="btn btn-secondary mt-3">Back to Dealers</a>
     </div>
 </body>
 </html>

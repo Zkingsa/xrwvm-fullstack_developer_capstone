@@ -59,5 +59,4 @@ def submit_review_view(request):
     if request.method == 'POST':
         dealer_id = request.POST.get('dealer_id')
         review_text = request.POST.get('review')
-        # Simulate success
         return render(request, 'review_submitted.html', {'dealer_id': dealer_id, 'review': review_text, 'user': request.user})
