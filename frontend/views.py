@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
@@ -21,32 +21,32 @@ def logout_view(request):
 
 def dealers_view(request):
     dealers = [
-        {"id": 1, "name": "CarMax", "state": "CA", "address": "123 Main St"},
-        {"id": 2, "name": "AutoNation", "state": "TX", "address": "456 Oak Ave"},
-        {"id": 3, "name": "Carvana", "state": "AZ", "address": "789 Pine Rd"},
-        {"id": 4, "name": "Enterprise", "state": "CA", "address": "321 Elm St"},
-        {"id": 5, "name": "Hertz", "state": "KS", "address": "654 Maple Dr"}
+        {"id": 1, "name": "CarMax", "city": "Los Angeles", "address": "123 Main St", "zip": "90001", "state": "CA"},
+        {"id": 2, "name": "AutoNation", "city": "Houston", "address": "456 Oak Ave", "zip": "77001", "state": "TX"},
+        {"id": 3, "name": "Carvana", "city": "Phoenix", "address": "789 Pine Rd", "zip": "85001", "state": "AZ"},
+        {"id": 4, "name": "Enterprise", "city": "San Francisco", "address": "321 Elm St", "zip": "94101", "state": "CA"},
+        {"id": 5, "name": "Hertz", "city": "Wichita", "address": "654 Maple Dr", "zip": "67201", "state": "KS"}
     ]
     return render(request, 'dealers.html', {'dealers': dealers, 'user': request.user})
 
 def dealers_by_state_view(request, state):
     dealers = [
-        {"id": 1, "name": "CarMax", "state": "CA", "address": "123 Main St"},
-        {"id": 2, "name": "AutoNation", "state": "TX", "address": "456 Oak Ave"},
-        {"id": 3, "name": "Carvana", "state": "AZ", "address": "789 Pine Rd"},
-        {"id": 4, "name": "Enterprise", "state": "CA", "address": "321 Elm St"},
-        {"id": 5, "name": "Hertz", "state": "KS", "address": "654 Maple Dr"}
+        {"id": 1, "name": "CarMax", "city": "Los Angeles", "address": "123 Main St", "zip": "90001", "state": "CA"},
+        {"id": 2, "name": "AutoNation", "city": "Houston", "address": "456 Oak Ave", "zip": "77001", "state": "TX"},
+        {"id": 3, "name": "Carvana", "city": "Phoenix", "address": "789 Pine Rd", "zip": "85001", "state": "AZ"},
+        {"id": 4, "name": "Enterprise", "city": "San Francisco", "address": "321 Elm St", "zip": "94101", "state": "CA"},
+        {"id": 5, "name": "Hertz", "city": "Wichita", "address": "654 Maple Dr", "zip": "67201", "state": "KS"}
     ]
     filtered_dealers = [d for d in dealers if d['state'] == state]
     return render(request, 'dealers.html', {'dealers': filtered_dealers, 'user': request.user})
 
 def dealer_details_view(request, dealer_id):
     dealers = [
-        {"id": 1, "name": "CarMax", "state": "CA", "address": "123 Main St", "reviews": [{"user": "John", "text": "Great service!"}]},
-        {"id": 2, "name": "AutoNation", "state": "TX", "address": "456 Oak Ave", "reviews": []},
-        {"id": 3, "name": "Carvana", "state": "AZ", "address": "789 Pine Rd", "reviews": []},
-        {"id": 4, "name": "Enterprise", "state": "CA", "address": "321 Elm St", "reviews": []},
-        {"id": 5, "name": "Hertz", "state": "KS", "address": "654 Maple Dr", "reviews": []}
+        {"id": 1, "name": "CarMax", "city": "Los Angeles", "address": "123 Main St", "zip": "90001", "state": "CA", "reviews": [{"user": "John", "text": "Great service!"}]},
+        {"id": 2, "name": "AutoNation", "city": "Houston", "address": "456 Oak Ave", "zip": "77001", "state": "TX", "reviews": []},
+        {"id": 3, "name": "Carvana", "city": "Phoenix", "address": "789 Pine Rd", "zip": "85001", "state": "AZ", "reviews": []},
+        {"id": 4, "name": "Enterprise", "city": "San Francisco", "address": "321 Elm St", "zip": "94101", "state": "CA", "reviews": []},
+        {"id": 5, "name": "Hertz", "city": "Wichita", "address": "654 Maple Dr", "zip": "67201", "state": "KS", "reviews": []}
     ]
     dealer = next((d for d in dealers if d['id'] == dealer_id), None)
     return render(request, 'dealer_details.html', {'dealer': dealer, 'user': request.user})
